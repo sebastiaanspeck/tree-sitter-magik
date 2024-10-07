@@ -5,9 +5,11 @@ on:
     branches: [main]
     paths:
       - grammar.js
+      - package.json
   pull_request:
     paths:
       - grammar.js
+      - package.json
 
 jobs:
   lint:
