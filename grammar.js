@@ -484,14 +484,14 @@ module.exports = grammar({
 
     // @ <identifier>
     label: $ =>
-      /@\s?(\|[\p{L}\p{N}_?.!]*\||[\p{L}\p{N}_?!]*)+/u,
+      /@\s?(\|[\p{L}\p{N}_?.!]*\||[\p{L}\p{N}_?!]+)+/u,
 
     number: $ => token(
       choice(
         seq(
           choice(/\p{N}+/u, /\p{N}+\.\p{N}+/u),
           optional(seq(/[eE&][+-]?/, /\p{N}+/u))),
-        /(?:[2-9]|[1-2][0-9]|3[0-6])[rR][a-zA-Z0-9]+/)),
+        /(?:[2-9]|[1-2]\d|3[0-6])[rR][a-zA-Z0-9]+/)),
 
     variable: $ => prec.left($._identifier),
 
