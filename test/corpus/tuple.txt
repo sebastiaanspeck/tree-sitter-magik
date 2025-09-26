@@ -16,54 +16,13 @@ $
   (fragment
     (assignment
       (parenthesized_expression
-        (variable)
-        (gather
-          (variable)))
+        (expression_list
+          (variable)
+          (gather
+            (variable))))
       (invoke
         (variable)
-        (number)
-        (unary_operator
-          (number))
-        (unary_operator
-          (number))
-        (number))))
-  (fragment
-    (assignment
-      (parenthesized_expression
-        (variable)
-        (variable)
-        (variable))
-      (parenthesized_expression
-        (scatter
-          (variable)))))
-  (fragment
-    (assignment
-      (parenthesized_expression
-        (variable)
-        (variable)
-        (gather
-          (variable)))
-      (parenthesized_expression
-        (scatter
-          (variable)))))
-  (fragment
-    (assignment
-      (parenthesized_expression
-        (variable)
-        (variable)
-        (variable)
-        (gather
-          (variable)))
-      (parenthesized_expression
-        (variable)
-        (scatter
-          (variable)))))
-  (fragment
-    (assignment
-      (variable)
-      (allresults
-        (invoke
-          (variable)
+        (expression_list
           (number)
           (unary_operator
             (number))
@@ -71,13 +30,64 @@ $
             (number))
           (number)))))
   (fragment
+    (assignment
+      (parenthesized_expression
+        (expression_list
+          (variable)
+          (variable)
+          (variable)))
+      (parenthesized_expression
+        (expression_list
+          (scatter
+            (variable))))))
+  (fragment
+    (assignment
+      (parenthesized_expression
+        (expression_list
+          (variable)
+          (variable)
+          (gather
+            (variable))))
+      (parenthesized_expression
+        (expression_list
+          (scatter
+            (variable))))))
+  (fragment
+    (assignment
+      (parenthesized_expression
+        (expression_list
+          (variable)
+          (variable)
+          (variable)
+          (gather
+            (variable))))
+      (parenthesized_expression
+        (expression_list
+          (variable)
+          (scatter
+            (variable))))))
+  (fragment
+    (assignment
+      (variable)
+      (allresults
+        (invoke
+          (variable)
+          (expression_list
+            (number)
+            (unary_operator
+              (number))
+            (unary_operator
+              (number))
+            (number))))))
+  (fragment
     (scatter
       (allresults
         (invoke
           (variable)
-          (number)
-          (unary_operator
-            (number))
-          (unary_operator
-            (number))
-          (number))))))
+          (expression_list
+            (number)
+            (unary_operator
+              (number))
+            (unary_operator
+              (number))
+            (number)))))))

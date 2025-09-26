@@ -41,25 +41,29 @@ $
   (fragment
     (block
       (return
-        (unset)
-        (unset))))
-  (fragment
-    (block
-      (if
-        (true)
-        (return
+        (expression_list
           (unset)
           (unset)))))
   (fragment
     (block
+      (if
+        (true)
+        (return
+          (expression_list
+            (unset)
+            (unset))))))
+  (fragment
+    (block
       (return
-        (unset))))
+        (expression_list
+          (unset)))))
   (fragment
     (block
       (if
         (true)
         (return
-          (unset)))))
+          (expression_list
+            (unset))))))
   (fragment
     (block
       (label)

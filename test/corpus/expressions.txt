@@ -44,10 +44,12 @@ parallel assignment
   (fragment
     (assignment
       (parenthesized_expression
-        (variable)
-        (variable)
-        (variable))
+        (expression_list
+          (variable)
+          (variable)
+          (variable)))
       (parenthesized_expression
-        (number)
-        (number)
-        (number)))))
+        (expression_list
+          (number)
+          (number)
+          (number))))))

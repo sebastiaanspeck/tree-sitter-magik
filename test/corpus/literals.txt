@@ -198,9 +198,10 @@ $
     (vector))
   (fragment
     (vector
-      (number)
-      (number)
-      (number))))
+      (expression_list
+        (number)
+        (number)
+        (number)))))
 
 ================================================================================
 regular expression

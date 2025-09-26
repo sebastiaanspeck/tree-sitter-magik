@@ -40,36 +40,44 @@ $
     (if
       (true)
       (return
-        (false))))
+        (expression_list
+          (false)))))
   (fragment
     (if
       (true)
       (return
-        (false))
+        (expression_list
+          (false)))
       (elif
         (false)
         (return
-          (true)))
+          (expression_list
+            (true))))
       (else
         (return
-          (maybe)))))
+          (expression_list
+            (maybe))))))
   (fragment
     (if
       (true)
       (return
-        (false))
+        (expression_list
+          (false)))
       (else
         (return
-          (maybe)))))
+          (expression_list
+            (maybe))))))
   (fragment
     (if
       (true)
       (return
-        (false))
+        (expression_list
+          (false)))
       (elif
         (false)
         (return
-          (true))))))
+          (expression_list
+            (true)))))))
 
 ================================================================================
 simple if one-line expressions
@@ -88,36 +96,44 @@ $
     (if
       (true)
       (return
-        (false))))
+        (expression_list
+          (false)))))
   (fragment
     (if
       (true)
       (return
-        (false))
+        (expression_list
+          (false)))
       (elif
         (false)
         (return
-          (true)))
+          (expression_list
+            (true))))
       (else
         (return
-          (maybe)))))
+          (expression_list
+            (maybe))))))
   (fragment
     (if
       (true)
       (return
-        (false))
+        (expression_list
+          (false)))
       (else
         (return
-          (maybe)))))
+          (expression_list
+            (maybe))))))
   (fragment
     (if
       (true)
       (return
-        (false))
+        (expression_list
+          (false)))
       (elif
         (false)
         (return
-          (true))))))
+          (expression_list
+            (true)))))))
 
 ================================================================================
 complex if one-line expressions
@@ -194,39 +210,47 @@ $
       (if
         (true)
         (return
-          (false)))))
+          (expression_list
+            (false))))))
   (fragment
     (assignment
       (variable)
       (if
         (true)
         (return
-          (false))
+          (expression_list
+            (false)))
         (elif
           (false)
           (return
-            (true)))
+            (expression_list
+              (true))))
         (else
           (return
-            (maybe))))))
+            (expression_list
+              (maybe)))))))
   (fragment
     (assignment
       (variable)
       (if
         (true)
         (return
-          (false))
+          (expression_list
+            (false)))
         (else
           (return
-            (maybe))))))
+            (expression_list
+              (maybe)))))))
   (fragment
     (assignment
       (variable)
       (if
         (true)
         (return
-          (false))
+          (expression_list
+            (false)))
         (elif
           (false)
           (return
-            (true)))))))
+            (expression_list
+              (true))))))))

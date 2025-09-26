@@ -179,7 +179,7 @@ module.exports = grammar({
     catch: $ => seq(alias(/_catch/i, '_catch'), $._expression, $._terminator, optional($._codeblock), alias(/_endcatch/i, '_endcatch')),
 
     // _throw <expression> [ _with <rvalue tuple> ]
-    throw: $ => prec.left(seq(alias(/_throw/i, '_throw'), $._expression, optional(seq(alias(/_with/i, '_with'), $._expression_list)))),
+    throw: $ => prec.left(seq(alias(/_throw/i, '_throw'), $._expression, optional(seq(alias(/_with/i, '_with'), $.expression_list)))),
 
     // _primitive <number>
     primitive: $ => seq(alias(/_primitive/i, '_primitive'), $.number),
@@ -322,28 +322,28 @@ module.exports = grammar({
           field('operator', '.'),
           field('message', $.identifier),
           optional(choice(
-            seq('(', optional($._expression_list), ')'),
-            seq('<<', optional($._expression_list)))),
+            seq('(', optional($.expression_list), ')'),
+            seq('<<', optional($.expression_list)))),
         ),
       ),
 
     invoke: $ => prec.right(PREC.CALL,
       seq(
         field('receiver', $._expression),
-        seq('(', optional($._expression_list), ')')),
+        seq('(', optional($.expression_list), ')')),
     ),
 
     indexed_access: $ =>
       prec.left(PREC.CALL,
         seq(
           field('receiver', $._expression),
-          field('index', seq('[', optional($._expression_list), ']')),
+          field('index', seq('[', optional($.expression_list), ']')),
         ),
       ),
 
     slot_accessor: $ => prec.left(seq('.', /(\|\p{L}[\p{L}\p{N}_?!]*\|)|(\p{L}[\p{L}\p{N}_?!]*)/u)),
 
-    _expression_list: $ =>
+    expression_list: $ =>
       prec.right(seq($._expression, repeat(seq(',', $._expression)))),
 
     true: $ => alias(/_true/i, '_true'),
@@ -455,8 +455,8 @@ module.exports = grammar({
     return: $ =>
       prec.right(
         choice(
-          seq(alias(/_return/i, '_return'), optional($._expression_list)),
-          seq('>>', $._expression_list),
+          seq(alias(/_return/i, '_return'), optional($.expression_list)),
+          seq('>>', $.expression_list),
         ),
       ),
 
@@ -472,7 +472,7 @@ module.exports = grammar({
     scatter: $ => seq(alias(/_scatter/i, '_scatter'), $._expression),
     allresults: $ => seq(alias(/_allresults/i, '_allresults'), $._expression),
 
-    parenthesized_expression: $ => seq('(', $._expression_list, ')'),
+    parenthesized_expression: $ => seq('(', $.expression_list, ')'),
 
     _variable: $ =>
       choice(
@@ -518,7 +518,7 @@ module.exports = grammar({
 
     vector: $ => seq(
       '{',
-      optional($._expression_list),
+      optional($.expression_list),
       '}',
     ),
 

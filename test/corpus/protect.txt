@@ -22,15 +22,17 @@ $
         (call
           (variable)
           (identifier)
-          (variable)))
-        (protect
-          (call
-            (variable)
-            (identifier)
-            (string_literal))
-          (call
-            (variable)
-            (identifier))))))
+          (expression_list
+            (variable))))
+      (protect
+        (call
+          (variable)
+          (identifier)
+          (expression_list
+            (string_literal)))
+        (call
+          (variable)
+          (identifier))))))
 
 ================================================================================
 protect locking statement
@@ -56,13 +58,15 @@ $
         (call
           (variable)
           (identifier)
-          (variable)))
-        (protect
-          (self)
-          (call
-            (variable)
-            (identifier)
-            (string_literal))
-          (call
-            (variable)
-            (identifier))))))
+          (expression_list
+            (variable))))
+      (protect
+        (self)
+        (call
+          (variable)
+          (identifier)
+          (expression_list
+            (string_literal)))
+        (call
+          (variable)
+          (identifier))))))

@@ -40,9 +40,11 @@ $
     (catch
       (symbol)
       (return
-        (true))))
+        (expression_list
+          (true)))))
   (fragment
     (catch
       (symbol)
       (return
-        (true)))))
+        (expression_list
+          (true))))))

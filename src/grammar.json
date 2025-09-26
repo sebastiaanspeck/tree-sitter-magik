@@ -1460,7 +1460,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "_expression_list"
+                    "name": "expression_list"
                   }
                 ]
               },
@@ -2456,7 +2456,7 @@
                         "members": [
                           {
                             "type": "SYMBOL",
-                            "name": "_expression_list"
+                            "name": "expression_list"
                           },
                           {
                             "type": "BLANK"
@@ -2481,7 +2481,7 @@
                         "members": [
                           {
                             "type": "SYMBOL",
-                            "name": "_expression_list"
+                            "name": "expression_list"
                           },
                           {
                             "type": "BLANK"
@@ -2526,7 +2526,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "_expression_list"
+                    "name": "expression_list"
                   },
                   {
                     "type": "BLANK"
@@ -2571,7 +2571,7 @@
                   "members": [
                     {
                       "type": "SYMBOL",
-                      "name": "_expression_list"
+                      "name": "expression_list"
                     },
                     {
                       "type": "BLANK"
@@ -2606,7 +2606,7 @@
         ]
       }
     },
-    "_expression_list": {
+    "expression_list": {
       "type": "PREC_RIGHT",
       "value": 0,
       "content": {
@@ -3773,7 +3773,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "_expression_list"
+                    "name": "expression_list"
                   },
                   {
                     "type": "BLANK"
@@ -3791,7 +3791,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "_expression_list"
+                "name": "expression_list"
               }
             ]
           }
@@ -3902,7 +3902,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_expression_list"
+          "name": "expression_list"
         },
         {
           "type": "STRING",
@@ -4216,7 +4216,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_expression_list"
+              "name": "expression_list"
             },
             {
               "type": "BLANK"

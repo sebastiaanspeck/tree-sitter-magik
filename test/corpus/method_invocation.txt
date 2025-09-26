@@ -41,7 +41,8 @@ $
     (call
       (variable)
       (identifier)
-      (unset)))
+      (expression_list
+        (unset))))
   (fragment
     (call
       (call

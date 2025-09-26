@@ -162,8 +162,9 @@ _endblock
         (identifier)
         (identifier)
         (parenthesized_expression
-          (scatter
-            (variable))))
+          (expression_list
+            (scatter
+              (variable)))))
       (local
         (identifier)
         (variable))

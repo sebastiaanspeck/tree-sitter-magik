@@ -17,24 +17,30 @@ $
   (fragment
     (invoke
       (variable)
-      (symbol)
-      (vector)
-      (vector)
-      (vector
-        (class))))
+      (expression_list
+        (symbol)
+        (vector)
+        (vector)
+        (vector
+          (expression_list
+            (class))))))
   (fragment
     (invoke
       (variable)
-      (symbol)
-      (vector)
-      (unset)
-      (vector
-        (class))))
+      (expression_list
+        (symbol)
+        (vector)
+        (unset)
+        (vector
+          (expression_list
+            (class))))))
   (fragment
     (invoke
       (variable)
-      (symbol)
-      (vector)
-      (vector)
-      (vector
-        (class)))))
+      (expression_list
+        (symbol)
+        (vector)
+        (vector)
+        (vector
+          (expression_list
+            (class)))))))

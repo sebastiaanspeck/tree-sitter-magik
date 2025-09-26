@@ -32,9 +32,11 @@ $
   (fragment
     (throw
       (symbol)
-      (variable)))
+      (expression_list
+        (variable))))
   (fragment
     (throw
       (symbol)
-      (variable)
-      (variable))))
+      (expression_list
+        (variable)
+        (variable)))))

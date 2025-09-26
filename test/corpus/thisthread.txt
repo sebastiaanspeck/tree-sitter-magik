@@ -14,7 +14,8 @@ $
     (call
       (thisthread)
       (identifier)
-      (number)))
+      (expression_list
+        (number))))
   (fragment
     (call
       (thisthread)

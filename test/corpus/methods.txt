@@ -108,7 +108,7 @@ $
     (method
       (identifier)
       (identifier)
-        (argument)))
+      (argument)))
   (fragment
     (method
       (identifier)
@@ -117,8 +117,8 @@ $
   (fragment
     (method
       (identifier)
-        (argument)
-        (argument)))
+      (argument)
+      (argument)))
   (fragment
     (method
       (identifier)
@@ -184,66 +184,79 @@ $
       (identifier)
       (identifier)
       (return
-        (if
-          (true)
-          (return
-            (false))))))
+        (expression_list
+          (if
+            (true)
+            (return
+              (expression_list
+                (false))))))))
   (fragment
     (method
       (identifier)
       (identifier)
       (return
-        (if
-          (true)
-          (return
-            (false))
-          (elif
-            (false)
+        (expression_list
+          (if
+            (true)
             (return
-              (true)))))))
+              (expression_list
+                (false)))
+            (elif
+              (false)
+              (return
+                (expression_list
+                  (true)))))))))
   (fragment
     (method
       (identifier)
       (identifier)
       (argument)
       (return
-        (if
-          (relational_operator
-            (variable)
-            (true))
-          (return
-            (false))
-          (elif
-            (relational_operator
-              (variable)
-              (false))
-            (return
-              (true)))
-          (else
-            (return
-              (maybe)))))))
-  (fragment
-    (method
-      (identifier)
-      (identifier)
-      (argument)
-      (argument)
-      (return
-        (call
+        (expression_list
           (if
             (relational_operator
               (variable)
-              (variable))
+              (true))
             (return
-              (false))
+              (expression_list
+                (false)))
             (elif
+              (relational_operator
+                (variable)
+                (false))
+              (return
+                (expression_list
+                  (true))))
+            (else
+              (return
+                (expression_list
+                  (maybe)))))))))
+  (fragment
+    (method
+      (identifier)
+      (identifier)
+      (argument)
+      (argument)
+      (return
+        (expression_list
+          (call
+            (if
               (relational_operator
                 (variable)
                 (variable))
               (return
-                (true))))
-          (identifier)
-          (maybe))))))
+                (expression_list
+                  (false)))
+              (elif
+                (relational_operator
+                  (variable)
+                  (variable))
+                (return
+                  (expression_list
+                    (true)))))
+            (identifier)
+            (expression_list
+              (maybe))))))))
 
 ================================================================================
 method documentation
