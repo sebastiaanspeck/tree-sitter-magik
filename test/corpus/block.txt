@@ -35,6 +35,12 @@ _block @ |la.bel1|
 _endblock
 $
 
+_pragma(classify_level=basic)
+_block
+  _return
+_endblock
+$
+
 --------------------------------------------------------------------------------
 
 (source_file
@@ -71,4 +77,8 @@ $
   (fragment
     (block
       (label)
+      (return)))
+  (fragment
+    (pragma)
+    (block
       (return))))
