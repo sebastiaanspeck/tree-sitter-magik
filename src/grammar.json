@@ -2273,7 +2273,7 @@
           "members": [
             {
               "type": "PATTERN",
-              "value": "\\p{L}[\\p{L}\\p{N}_?!]*",
+              "value": "\\p{L}[\\p{L}\\p{N}]*",
               "flags": "u"
             },
             {
