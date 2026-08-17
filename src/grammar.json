@@ -2566,6 +2566,10 @@
                   {
                     "type": "SYMBOL",
                     "name": "scatter"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "gather"
                   }
                 ]
               },
