@@ -246,7 +246,7 @@ module.exports = grammar({
         alias(/_leave/i, '_leave'),
         optional($.label),
         optional(seq(alias(/_with/i, '_with'), choice(
-          seq('(', seq($._expression, repeat1(choice(seq(',', $._expression), $.scatter))), ')'),
+          seq('(', $._expression, ',', $._expression_list, ')'),
           $._expression_list))),
       )),
 
@@ -256,7 +256,7 @@ module.exports = grammar({
         alias(/_continue/i, '_continue'),
         optional($.label),
         optional(seq(alias(/_with/i, '_with'), choice(
-          seq('(', seq($._expression, repeat1(choice(seq(',', $._expression), $.scatter))), ')'),
+          seq('(', $._expression, ',', $._expression_list, ')'),
           $._expression_list))),
       )),
 
@@ -352,7 +352,11 @@ module.exports = grammar({
     )),
 
     _expression_list: $ =>
-      prec.right(seq($._expression, repeat(choice(seq(',', $._expression), $.scatter)))),
+      prec.right(seq($._expression, optional(choice(
+        seq(',', $._expression_list),
+        $.scatter,
+        $.gather,
+      )))),
 
     true: $ => alias(/_true/i, '_true'),
     false: $ => alias(/_false/i, '_false'),

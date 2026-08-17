@@ -1851,38 +1851,16 @@
                             "value": "("
                           },
                           {
-                            "type": "SEQ",
-                            "members": [
-                              {
-                                "type": "SYMBOL",
-                                "name": "_expression"
-                              },
-                              {
-                                "type": "REPEAT1",
-                                "content": {
-                                  "type": "CHOICE",
-                                  "members": [
-                                    {
-                                      "type": "SEQ",
-                                      "members": [
-                                        {
-                                          "type": "STRING",
-                                          "value": ","
-                                        },
-                                        {
-                                          "type": "SYMBOL",
-                                          "name": "_expression"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "SYMBOL",
-                                      "name": "scatter"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
+                            "type": "SYMBOL",
+                            "name": "_expression"
+                          },
+                          {
+                            "type": "STRING",
+                            "value": ","
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "_expression_list"
                           },
                           {
                             "type": "STRING",
@@ -1961,38 +1939,16 @@
                             "value": "("
                           },
                           {
-                            "type": "SEQ",
-                            "members": [
-                              {
-                                "type": "SYMBOL",
-                                "name": "_expression"
-                              },
-                              {
-                                "type": "REPEAT1",
-                                "content": {
-                                  "type": "CHOICE",
-                                  "members": [
-                                    {
-                                      "type": "SEQ",
-                                      "members": [
-                                        {
-                                          "type": "STRING",
-                                          "value": ","
-                                        },
-                                        {
-                                          "type": "SYMBOL",
-                                          "name": "_expression"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "SYMBOL",
-                                      "name": "scatter"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
+                            "type": "SYMBOL",
+                            "name": "_expression"
+                          },
+                          {
+                            "type": "STRING",
+                            "value": ","
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "_expression_list"
                           },
                           {
                             "type": "STRING",
@@ -2589,29 +2545,38 @@
             "name": "_expression"
           },
           {
-            "type": "REPEAT",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": ","
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "_expression"
-                    }
-                  ]
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "scatter"
-                }
-              ]
-            }
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "_expression_list"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "scatter"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "gather"
+                  }
+                ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           }
         ]
       }
