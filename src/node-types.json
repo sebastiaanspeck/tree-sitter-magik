@@ -1759,11 +1759,6 @@
     }
   },
   {
-    "type": "character_literal",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "class",
     "named": true,
     "fields": {}
@@ -2270,6 +2265,10 @@
         },
         {
           "type": "handling",
+          "named": true
+        },
+        {
+          "type": "identifier",
           "named": true
         },
         {
@@ -7057,7 +7056,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "allresults",
@@ -10512,15 +10511,7 @@
     "named": false
   },
   {
-    "type": " ",
-    "named": false
-  },
-  {
     "type": "\"",
-    "named": false
-  },
-  {
-    "type": "%",
     "named": false
   },
   {
@@ -10894,6 +10885,10 @@
   {
     "type": "_xor",
     "named": false
+  },
+  {
+    "type": "character_literal",
+    "named": true
   },
   {
     "type": "comment",

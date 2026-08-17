@@ -8,7 +8,7 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-const ID_REGEX = /(\|\p{L}?[\p{L}\p{N}_?!]*\|)|(\p{L}[\p{L}\p{N}_?!]*)/u;
+const ID_REGEX = /(\|\p{L}?[\p{L}\p{N}_?!]*\|)|((\p{L}|\\.)([\p{L}\p{N}_?!]|\\.)*)/u;
 
 
 const PREC = {
@@ -49,11 +49,11 @@ module.exports = grammar({
     package: $ =>
       prec.left(seq(alias(/_package/i, '_package'), $._identifier, repeat($.fragment))),
 
-    _dollar: $ => token(seq('$', optional('\r'), '\n')),
+    _dollar: $ => token(seq('$', /[ \t]*/, optional(seq(optional('\r'), '\n')))),
 
     _method_declaration: $ =>
       seq(
-        optional(seq($.pragma, optional($.documentation))),
+        repeat(seq($.pragma, optional($.documentation))),
         $.method,
       ),
 
@@ -82,7 +82,7 @@ module.exports = grammar({
                 seq(choice('<<', '^<<'), $._arguments),
               ))),
             seq('[', optional($._arguments), ']', optional(seq(choice('<<', '^<<'), $._arguments)))),
-          $._line_terminator,
+          optional($._line_terminator),
           optional($.documentation),
           optional($._codeblock),
           alias(/_endmethod/i, '_endmethod'),
@@ -107,7 +107,7 @@ module.exports = grammar({
         alias(/_endproc/i, '_endproc'),
       ),
 
-    argument: $ => $._identifier,
+    argument: $ => prec.left(1, $._identifier),
 
     _arguments: $ => prec.right(seq($.argument, repeat(seq(',', $.argument)), optional(','))),
 
@@ -237,7 +237,7 @@ module.exports = grammar({
     loopbody: $ =>
       seq(
         alias(/_loopbody/i, '_loopbody'),
-        '(', seq($._expression, repeat(seq(',', $._expression))), ')',
+        '(', $._expression_list, ')',
       ),
 
     // _leave [ @ <identifier> ] [_with <rvalue tuple> ]
@@ -246,8 +246,8 @@ module.exports = grammar({
         alias(/_leave/i, '_leave'),
         optional($.label),
         optional(seq(alias(/_with/i, '_with'), choice(
-          seq('(', seq($._expression, repeat1(seq(',', $._expression))), ')'),
-          seq($._expression, repeat(seq(',', $._expression)))))),
+          seq('(', seq($._expression, repeat1(choice(seq(',', $._expression), $.scatter))), ')'),
+          $._expression_list))),
       )),
 
     // _continue _with <rvalue tuple>
@@ -256,8 +256,8 @@ module.exports = grammar({
         alias(/_continue/i, '_continue'),
         optional($.label),
         optional(seq(alias(/_with/i, '_with'), choice(
-          seq('(', seq($._expression, repeat1(seq(',', $._expression))), ')'),
-          seq($._expression, repeat(seq(',', $._expression)))))),
+          seq('(', seq($._expression, repeat1(choice(seq(',', $._expression), $.scatter))), ')'),
+          $._expression_list))),
       )),
 
     // _protect [ _locking <expression> ]
@@ -307,7 +307,7 @@ module.exports = grammar({
         $.vector,
       ),
 
-    character_literal: $ => seq('%', choice(/\p{L}[\p{L}\p{N}]*/u, /./, ' ')),
+    character_literal: $ => token(seq('%', choice(/\p{L}[\p{L}\p{N}]*/u, /./, ' '))),
 
     string_literal: $ =>
       choice(
@@ -323,7 +323,7 @@ module.exports = grammar({
         seq(
           field('receiver', $._expression),
           field('operator', '.'),
-          field('message', $.identifier),
+          field('message', alias($._message_name, $.identifier)),
           optional(choice(
             seq('(', optional($._expression_list), ')'),
             seq('<<', optional($._expression_list)))),
@@ -344,10 +344,15 @@ module.exports = grammar({
         ),
       ),
 
-    slot_accessor: $ => prec.left(seq('.', /(\|\p{L}[\p{L}\p{N}_?!]*\|)|(\p{L}[\p{L}\p{N}_?!]*)/u)),
+    slot_accessor: $ => prec.left(seq('.', $._message_name)),
+
+    _message_name: $ => token(choice(
+      seq(/\p{L}[\p{L}\p{N}_?!]*/u, optional(/\|[^|\n]*\|/u)),
+      /\|[^|\n]*\|/u,
+    )),
 
     _expression_list: $ =>
-      prec.right(seq($._expression, repeat(seq(',', $._expression)))),
+      prec.right(seq($._expression, repeat(choice(seq(',', $._expression), $.scatter)))),
 
     true: $ => alias(/_true/i, '_true'),
     false: $ => alias(/_false/i, '_false'),
@@ -427,15 +432,16 @@ module.exports = grammar({
     local: $ => prec.left(
       seq(alias(/_local/i, '_local'),
         choice(
-          seq('(', seq($.identifier, optional(seq('<<', $._expression))), repeat(seq(',', seq($.identifier, optional(seq('<<', $._expression))))), ')'),
-          seq('(', seq($.identifier, optional(seq('<<', $._expression))), repeat(seq(',', seq($.identifier, optional(seq('<<', $._expression))))), seq(optional(','), alias(/_gather/i, '_gather'), seq($.identifier, optional(seq('<<', $._expression)))), ')'),
-          seq('(', seq(alias(/_gather/i, '_gather'), $.identifier, optional(seq('<<', $._expression))), ')'),
-          seq(seq($.identifier, optional(seq('<<', $._expression))), repeat(seq(',', seq($.identifier, optional(seq('<<', $._expression))))))),
-        optional(seq('<<', $._expression)))),
+          seq('(', seq($.identifier, optional(seq('<<', $._expression))), repeat(seq(',', seq($.identifier, optional(seq('<<', $._expression))))), ')', optional(seq('<<', $._expression))),
+          seq('(', seq($.identifier, optional(seq('<<', $._expression))), repeat(seq(',', seq($.identifier, optional(seq('<<', $._expression))))), seq(optional(','), alias(/_gather/i, '_gather'), seq($.identifier, optional(seq('<<', $._expression)))), ')', optional(seq('<<', $._expression))),
+          seq('(', seq(alias(/_gather/i, '_gather'), $.identifier, optional(seq('<<', $._expression))), ')', optional(seq('<<', $._expression))),
+          seq(seq($.identifier, optional(seq('<<', $._expression))), repeat(seq(',', seq($.identifier, optional(seq('<<', $._expression)))))),
+        ),
+      )),
 
     _global_assignment: $ =>
       seq(
-        optional(seq($.pragma, optional($.documentation))),
+        repeat(seq($.pragma, optional($.documentation))),
         alias(/_global/i, '_global'), optional(alias(/_constant/i, '_constant')), choice($.identifier, $.dynamic_variable), '<<', $._expression),
 
     constant: $ =>
@@ -449,7 +455,7 @@ module.exports = grammar({
           $._identifier_list),
         seq('<<', $._expression)),
 
-    dynamic: $ => seq(alias(/_dynamic/i, '_dynamic'), $.dynamic_variable, repeat(seq(',', $.dynamic_variable)), optional(seq('<<', $._expression))),
+    dynamic: $ => seq(alias(/_dynamic/i, '_dynamic'), choice($.dynamic_variable, $.identifier), repeat(seq(',', choice($.dynamic_variable, $.identifier))), optional(seq('<<', $._expression))),
 
     import: $ => seq(alias(/_import/i, '_import'), $._identifier_list),
 
@@ -464,11 +470,8 @@ module.exports = grammar({
       ),
 
     _definition: $ =>
-      prec(1, seq($.pragma,
-        optional($.documentation),
-        choice(
-          $.invoke,
-          $.call)),
+      prec(1, seq(repeat1(seq($.pragma, optional($.documentation))),
+        $._expression),
       ),
 
     gather: $ => seq(alias(/_gather/i, '_gather'), $._expression),
@@ -487,7 +490,7 @@ module.exports = grammar({
 
     // @ <identifier>
     label: $ =>
-      /@\s?(\|[\p{L}\p{N}_?.!]*\||[\p{L}\p{N}_?!]+)+/u,
+      /@\s?(\|[\p{L}\p{N}_?.!]*\||([\p{L}\p{N}_?!]|\\.)+)+/u,
 
     number: $ => token(
       choice(
