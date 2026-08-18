@@ -7,11 +7,30 @@ b ^<< 1
 b ^ << 1
 c +<< 1
 c + << 1
+c -<< 1
+c - << 1
+c *<< 1
+c * << 1
+c **<< 1
+c ** << 1
+c /<< 1
+c / << 1
+c _mod<< 1
+c _mod << 1
+c _MOD<< 1
+c _div<< 1
+c _div << 1
 d _orif<< a
 d _orif << a
 d _ORIF<< a
-c _mod<< 1
-c _MOD<< 1
+d _or<< a
+d _or << a
+d _andif<< a
+d _andif << a
+d _and<< a
+d _and << a
+d _xor<< a
+d _xor << a
 
 --------------------------------------------------------------------------------
 
@@ -39,15 +58,7 @@ c _MOD<< 1
   (fragment
     (assignment
       (variable)
-      (variable)))
-  (fragment
-    (assignment
-      (variable)
-      (variable)))
-  (fragment
-    (assignment
-      (variable)
-      (variable)))
+      (number)))
   (fragment
     (assignment
       (variable)
@@ -55,4 +66,102 @@ c _MOD<< 1
   (fragment
     (assignment
       (variable)
-      (number))))
+      (number)))
+  (fragment
+    (assignment
+      (variable)
+      (number)))
+  (fragment
+    (assignment
+      (variable)
+      (number)))
+  (fragment
+    (assignment
+      (variable)
+      (number)))
+  (fragment
+    (assignment
+      (variable)
+      (number)))
+  (fragment
+    (assignment
+      (variable)
+      (number)))
+  (fragment
+    (assignment
+      (variable)
+      (number)))
+  (fragment
+    (assignment
+      (variable)
+      (number)))
+  (fragment
+    (assignment
+      (variable)
+      (number)))
+  (fragment
+    (assignment
+      (variable)
+      (number)))
+  (fragment
+    (assignment
+      (variable)
+      (number)))
+  (fragment
+    (assignment
+      (variable)
+      (variable)))
+  (fragment
+    (assignment
+      (variable)
+      (variable)))
+  (fragment
+    (assignment
+      (variable)
+      (variable)))
+  (fragment
+    (assignment
+      (variable)
+      (variable)))
+  (fragment
+    (assignment
+      (variable)
+      (variable)))
+  (fragment
+    (assignment
+      (variable)
+      (variable)))
+  (fragment
+    (assignment
+      (variable)
+      (variable)))
+  (fragment
+    (assignment
+      (variable)
+      (variable)))
+  (fragment
+    (assignment
+      (variable)
+      (variable)))
+  (fragment
+    (assignment
+      (variable)
+      (variable)))
+  (fragment
+    (assignment
+      (variable)
+      (variable))))
+
+================================================================================
+augmented assignment operator does not span a newline
+================================================================================
+
+x +
+<< y
+$
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (ERROR
+    (variable)))
