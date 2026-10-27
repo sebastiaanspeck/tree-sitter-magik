@@ -25,7 +25,7 @@
     "src/**"
   ],
   "dependencies": {
-    "node-addon-api": "^8.9.0",
+    "node-addon-api": "^8.9.2",
     "node-gyp-build": "^4.8.4"
   },
   "peerDependencies": {
@@ -37,11 +37,11 @@
     }
   },
   "devDependencies": {
-    "eslint": "^10.8.0",
+    "eslint": "^10.9.1",
     "eslint-config-treesitter": "^1.0.2",
-    "globals": "^17.8.0",
+    "globals": "^17.13.0",
     "prebuildify": "^6.0.1",
-    "tree-sitter-cli": "^0.26.11"
+    "tree-sitter-cli": "^0.27.0"
   },
   "scripts": {
     "install": "node-gyp-build",

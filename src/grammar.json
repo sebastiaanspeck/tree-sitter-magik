@@ -149,8 +149,25 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "pragma"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "pragma"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "documentation"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -2323,8 +2340,9 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "_identifier"
+              "type": "PATTERN",
+              "value": "\\p{L}[\\p{L}\\p{N}]*",
+              "flags": "u"
             },
             {
               "type": "PATTERN",
@@ -2405,7 +2423,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "\\/.*?\\/[qisdlmuCX]*"
+        "value": "\\/.*?\\/[qisdlmucx]*"
       }
     },
     "call": {
@@ -3461,8 +3479,25 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "pragma"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "pragma"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "documentation"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "BLANK"
